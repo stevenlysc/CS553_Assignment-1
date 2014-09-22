@@ -90,10 +90,10 @@ int do_Iops(int thread_n)
 
 void * flops(void * arg)
 {
-    double sum = 0;
+    float sum = 0;
     
     for (int i = 0; i < LOOPS; i++) {
-        sum += i;
+        sum += (float)i;
     }
     
     return NULL;
