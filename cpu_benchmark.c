@@ -48,7 +48,7 @@ int do_Flops(int thread_n)
 {
     int i = 0;
     struct timeval startTime, endTime;
-    unsigned long operations = 2ul * LOOPS * thread_n;
+    unsigned long operations = LOOPS * thread_n;
     pthread_t threads[thread_n];
     
     gettimeofday(&startTime, NULL);
