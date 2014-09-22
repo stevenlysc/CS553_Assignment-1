@@ -1,0 +1,1 @@
+With 4 threads, for sequential writing to disk, the throughput is 0.949780 MBps and the latency is 0.004016 ms

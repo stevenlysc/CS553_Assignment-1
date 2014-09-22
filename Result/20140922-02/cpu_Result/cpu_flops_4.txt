@@ -1,0 +1,1 @@
+With 4 threads, the execution time is 399.343000 ms and the GFlOPS is   2.003290

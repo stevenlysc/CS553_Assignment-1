@@ -115,7 +115,7 @@ int do_Read_Ran(int block_size, int thread_n)
     double throughput = ((double) thread_n * capacity / (1024.0 * 1024.0)) / (execTime / 1000.0); // MBps
     double latency = execTime / capacity;
     
-    printf("With %d threads, for random reading from disk, the throughput is %8lf MBps and the latency is %8lf ms\n", thread_n, throughput, latency);
+    printf("With %d threads, for random reading from disk, the throughput is %10lf MBps and the latency is %10.9lf ms\n", thread_n, throughput, latency);
     
     return 0;
 }
@@ -149,7 +149,7 @@ int do_Read_Seq(int block_size, int thread_n)
     double throughput = ((double) thread_n * capacity / (1024.0 * 1024.0)) / (execTime / 1000.0); // MBps
     double latency = execTime / capacity;
     
-    printf("With %d threads, for sequential reading from disk, the throughput is %7lf MBps and the latency is %7lf ms\n", thread_n, throughput, latency);
+    printf("With %d threads, for sequential reading from disk, the throughput is %10lf MBps and the latency is %10.9lf ms\n", thread_n, throughput, latency);
     
     return 0;
 }
@@ -182,8 +182,8 @@ int do_Write_Ran(int block_size, int thread_n)
     double execTime = 1000.0 * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec) / 1000.0; // total time in ms
     double throughput = ((double) thread_n * capacity / (1024.0 * 1024.0)) / (execTime / 1000.0); // MBps
     double latency = execTime / capacity;
-    
-    printf("With %d threads, for random writing to disk, the throughput is %7lf MBps and the latency is %7lf ms\n", thread_n, throughput, latency);
+
+    printf("With %d threads, for random writing to disk, the throughput is %10lf MBps and the latency is %10.9lf ms\n", thread_n, throughput, latency);
     
     return 0;
 }
@@ -217,7 +217,7 @@ int do_Write_Seq(int block_size, int thread_n)
     double throughput = ((double) thread_n * capacity / (1024.0 * 1024.0)) / (execTime / 1000.0); // MBps
     double latency = execTime / capacity;
     
-    printf("With %d threads, for sequential writing to disk, the throughput is %7lf MBps and the latency is %7lf ms\n", thread_n, throughput, latency);
+    printf("With %d threads, for sequential writing to disk, the throughput is %10lf MBps and the latency is %10.9lf ms\n", thread_n, throughput, latency);
     
     return 0;
 }

@@ -1,0 +1,1 @@
+With 8 threads, the execution time is 758.698000 ms and the GFlOPS is   2.108876
