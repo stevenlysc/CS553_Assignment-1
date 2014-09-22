@@ -1,0 +1,3 @@
+gcc cpu_benchmark.c -pthread -o cpu_benchmark
+
+gcc disk_benchmark.c -pthread -lm -o disk_benchmark

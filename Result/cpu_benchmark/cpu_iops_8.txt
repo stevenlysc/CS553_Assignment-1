@@ -1,0 +1,1 @@
+With 8 threads, the execution time is 752.801000 ms and the GIOPS is   2.125396
