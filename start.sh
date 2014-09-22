@@ -1,4 +1,4 @@
-sh makeAll
+sh MakeAll
 ######################
 ######################
 mkdir cpu_Result

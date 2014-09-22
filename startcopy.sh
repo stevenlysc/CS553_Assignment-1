@@ -1,4 +1,4 @@
-sh makeAll
+sh MakeAll
 ######################
 ######################
 mkdir cpu_Result
@@ -14,4 +14,4 @@ mv cpu"_"$opt"_"$thread.txt cpu_Result
 done
 done
 
-rm cpu_benchmark memory_benchmark disk_benchmark test.bin
+rm cpu_benchmark
