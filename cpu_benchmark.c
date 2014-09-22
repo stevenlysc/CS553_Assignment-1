@@ -46,15 +46,16 @@ int main(int argc, char const * argv[])
 
 int do_Flops(int thread_n)
 {
+    int i = 0;
     struct timeval startTime, endTime;
     unsigned long operations = 2ul * LOOPS * thread_n;
     pthread_t threads[thread_n];
     
     gettimeofday(&startTime, NULL);
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_create(&threads[i], NULL, iops, NULL);
     }
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
@@ -68,15 +69,16 @@ int do_Flops(int thread_n)
 
 int do_Iops(int thread_n)
 {
+    int i = 0;
     struct timeval startTime, endTime;
     unsigned long operations = 2ul * LOOPS * thread_n;
     pthread_t threads[thread_n];
     
     gettimeofday(&startTime, NULL);
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_create(&threads[i], NULL, iops, NULL);
     }
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
@@ -90,9 +92,10 @@ int do_Iops(int thread_n)
 
 void * flops(void * arg)
 {
+    int i = 0;
     float sum = 0;
     
-    for (int i = 0; i < LOOPS; i++) {
+    for (i = 0; i < LOOPS; i++) {
         sum += (float)i;
     }
     

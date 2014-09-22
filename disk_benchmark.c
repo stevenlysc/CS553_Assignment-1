@@ -88,14 +88,15 @@ int main(int argc, char const *argv[])
 
 int do_Read_Ran(int block_size, int thread_n)
 {
+    int i = 0;
     pthread_t threads[thread_n];
     struct timeval startTime, endTime;
     
     gettimeofday(&startTime, NULL);
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_create(&threads[i], NULL, random_Read, (void *)(long)block_size);
     }
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
@@ -122,14 +123,15 @@ int do_Read_Ran(int block_size, int thread_n)
 
 int do_Read_Seq(int block_size, int thread_n)
 {
+    int i = 0;
     pthread_t threads[thread_n];
     struct timeval startTime, endTime;
     
     gettimeofday(&startTime, NULL);
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_create(&threads[i], NULL, sequential_Read, (void *)(long)block_size);
     }
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
@@ -156,14 +158,15 @@ int do_Read_Seq(int block_size, int thread_n)
 
 int do_Write_Ran(int block_size, int thread_n)
 {
+    int i = 0;
     pthread_t threads[thread_n];
     struct timeval startTime, endTime;
     
     gettimeofday(&startTime, NULL);
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_create(&threads[i], NULL, random_Write, (void *)(long)block_size);
     }
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
@@ -190,14 +193,15 @@ int do_Write_Ran(int block_size, int thread_n)
 
 int do_Write_Seq(int block_size, int thread_n)
 {
+    int i = 0;
     pthread_t threads[thread_n];
     struct timeval startTime, endTime;
     
     gettimeofday(&startTime, NULL);
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_create(&threads[i], NULL, sequential_Write, (void *)(long)block_size);
     }
-    for (int i = 0; i < thread_n; i++) {
+    for (i = 0; i < thread_n; i++) {
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
@@ -245,8 +249,8 @@ void * random_Read(void * arg)
         printf("File open failed.\n");
         exit(-1);
     }
-    
-    for (int i = 0; i < capacity / block_size; i++) {
+    int i = 0;
+    for (i = 0; i < capacity / block_size; i++) {
         fpos = (rand() % (capacity / block_size)) * block_size;
         lseek(fin, fpos, SEEK_SET);
         read(fin, buffer, block_size);
@@ -280,7 +284,8 @@ void * sequential_Read(void * arg)
         exit(-1);
     }
     
-    for (int i = 0; i < capacity / block_size; i++) {
+    int i = 0;
+    for (i = 0; i < capacity / block_size; i++) {
         read(fin, buffer, block_size);
     }
     
@@ -314,7 +319,8 @@ void * random_Write(void * arg)
         exit(-1);
     }
     
-    for (int i = 0; i < capacity / block_size; i++) {
+    int i = 0;
+    for (i = 0; i < capacity / block_size; i++) {
         fpos = (rand() % (capacity / block_size)) * block_size;
         memset(buffer, '0', block_size);
         lseek(fin, fpos, SEEK_SET);
@@ -349,7 +355,8 @@ void * sequential_Write(void * arg)
         exit(-1);
     }
     
-    for (int i = 0; i < capacity / block_size; i++) {
+    int i = 0;
+    for (i = 0; i < capacity / block_size; i++) {
         memset(buffer, '0', block_size);
         write(fin, buffer, block_size);
     }
