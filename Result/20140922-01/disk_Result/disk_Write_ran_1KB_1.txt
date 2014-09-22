@@ -1,1 +1,1 @@
-With 1 threads, for random writing to disk, the throughput is 20.323712 MBps and the latency is 0.000047 ms
+With 1 threads, for random writing to disk, the throughput is  23.858684 MBps and the latency is 0.000039972 ms

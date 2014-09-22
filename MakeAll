@@ -3,3 +3,7 @@ gcc cpu_benchmark.c -pthread -o cpu_benchmark
 gcc disk_benchmark.c -pthread -lm -o disk_benchmark
 
 gcc memory_benchmark.c -pthread -lm -o memory_benchmark
+
+gcc client_benchmark.c -pthread -o client_benchmark
+
+gcc server_benchmark.c -pthread -o server_benchmark

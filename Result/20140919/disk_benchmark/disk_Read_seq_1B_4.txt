@@ -1,1 +1,0 @@
-With 4 threads, for sequential reading from disk, the throughput is 2.474524 MBps and the latency is 0.001542 ms

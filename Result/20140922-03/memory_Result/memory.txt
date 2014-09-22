@@ -1,0 +1,12 @@
+Using 1 thread(s), sequential access          1 bytes, the throughput is  97.963463 MB/sec, the latency is 0.000009735 ms
+Using 1 thread(s), sequential access       1024 bytes, the throughput is 850.672350 MB/sec, the latency is 0.000001121 ms
+Using 1 thread(s), sequential access    1048576 bytes, the throughput is 693.030470 MB/sec, the latency is 0.000001376 ms
+Using 1 thread(s), random     access          1 bytes, the throughput is   1.460194 MB/sec, the latency is 0.000653115 ms
+Using 1 thread(s), random     access       1024 bytes, the throughput is 641.731427 MB/sec, the latency is 0.000001486 ms
+Using 1 thread(s), random     access    1048576 bytes, the throughput is 1373.397160 MB/sec, the latency is 0.000000694 ms
+Using 2 thread(s), sequential access          1 bytes, the throughput is 136.786333 MB/sec, the latency is 0.000013944 ms
+Using 2 thread(s), sequential access       1024 bytes, the throughput is 1496.678475 MB/sec, the latency is 0.000001274 ms
+Using 2 thread(s), sequential access    1048576 bytes, the throughput is 722.207166 MB/sec, the latency is 0.000002641 ms
+Using 2 thread(s), random     access          1 bytes, the throughput is   1.947230 MB/sec, the latency is 0.000979519 ms
+Using 2 thread(s), random     access       1024 bytes, the throughput is 866.256821 MB/sec, the latency is 0.000002202 ms
+Using 2 thread(s), random     access    1048576 bytes, the throughput is 2154.799736 MB/sec, the latency is 0.000000885 ms

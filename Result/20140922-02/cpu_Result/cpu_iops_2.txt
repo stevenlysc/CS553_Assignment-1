@@ -1,1 +1,1 @@
-With 2 threads, the execution time is 282.289000 ms and the GIOPS is   1.416988
+With 2 threads, the execution time is 285.887000 ms and the GIOPS is   1.399154
