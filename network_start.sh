@@ -14,7 +14,7 @@ do
             ", thread number: "$thread
 
             ./server_benchmark $connect $packet $thread &
-            ./client_benchmark $connect "17.0.0.1" $packet $thread >>	\
+            ./client_benchmark $connect "127.0.0.1" $packet $thread >>	\
             network"_"$connect"_"$packet"_"$thread.txt
 
             mv network"_"$connect"_"$packet"_"$thread.txt network_Result

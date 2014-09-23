@@ -82,7 +82,7 @@ int main(int argc, char const *argv[])
         printf("Invalid operation type.\n");
         return -1;
     }
-
+    
     return 0;
 }
 
@@ -100,7 +100,7 @@ int do_Read_Ran(int block_size, int thread_n)
         pthread_join(threads[i], NULL);
     }
     gettimeofday(&endTime, NULL);
-
+    
     int capacity;
     if (block_size == 1) {
         capacity = MAX / 50;
@@ -185,7 +185,7 @@ int do_Write_Ran(int block_size, int thread_n)
     double execTime = 1000.0 * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec) / 1000.0; // total time in ms
     double throughput = ((double) thread_n * capacity / (1024.0 * 1024.0)) / (execTime / 1000.0); // MBps
     double latency = execTime / capacity;
-
+    
     printf("With %d threads, for random writing to disk, the throughput is %10lf MBps and the latency is %10.9lf ms\n", thread_n, throughput, latency);
     
     return 0;
@@ -302,7 +302,7 @@ void * random_Write(void * arg)
     char * buffer = (char *)malloc(block_size * sizeof(char));
     int capacity;
     srand((int)time(0));
-
+    
     if (block_size == 1) {
         capacity = MAX / 50;
     }
@@ -348,7 +348,7 @@ void * sequential_Write(void * arg)
     else {
         capacity = MAX;
     }
-
+    
     int fin;
     if ((fin = open("test.bin", O_CREAT|O_TRUNC|O_WRONLY, 0666)) < 0) {
         printf("File open failed.\n");
@@ -366,8 +366,3 @@ void * sequential_Write(void * arg)
     
     return NULL;
 }
-
-
-
-
-
