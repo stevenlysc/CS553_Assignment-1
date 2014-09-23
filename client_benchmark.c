@@ -33,7 +33,6 @@ void *tcpClient(void *arg)
 	for (i = 0; i < LOOPS; ++i)
 	{
 		send(client_sock, buffer, thr_arg -> buf_size, 0);
-		recv(client_sock, buffer, thr_arg -> buf_size, 0);
 	}
 }
 
@@ -52,7 +51,6 @@ void *udpClient(void *arg)
 	for (i = 0; i < LOOPS; ++i)
 	{
 		sendto(client_sock, buffer, thr_arg -> buf_size, 0, (struct sockaddr *)&(thr_arg -> server_addr), sizeof(struct sockaddr));
-		recvfrom(client_sock, buffer, thr_arg -> buf_size, 0, (struct sockaddr *)&(thr_arg -> server_addr), &sockaddr_in_size);
 	}
 }
 
@@ -113,9 +111,9 @@ int main(int argc, char *argv[])
 
 	//Calculate the execte time and throughput. 
 	double execute_time = (1000.0 * (end_time.tv_sec - start_time.tv_sec) + (end_time.tv_usec - start_time.tv_usec) / 1000.0);
-	double throughput = (num_thr * 2.0 * LOOPS * 8.0 * buffer_size / (1024.0 * 1024.0)) / (execute_time / 1000.0);
-	double latency = execute_time / (num_thr * 2.0 * LOOPS * 8.0 * buffer_size);
-	printf("With %d threads, the latency is %10.9f ms and the throughput is %10f Mb/S\n", num_thr, latency,  throughput);
+	double throughput = (num_thr * LOOPS * buffer_size / (1024.0 * 1024.0)) / (execute_time / 1000.0);
+	double latency = execute_time / (num_thr * LOOPS * buffer_size);
+	printf("%d threads: the latency is %10.9f ms and the throughput is %10f MB/S\n", num_thr, latency,  throughput);
 
 	return 0;
 }

@@ -25,7 +25,6 @@ void *tcpOprtData(void *arg)
 	for (i = 0; i < LOOPS; ++i) 
 	{
 		recv(thr_arg -> sock, buffer, thr_arg -> buffer_size, 0);
-		send(thr_arg -> sock, buffer, thr_arg -> buffer_size, 0);
 	}
 
 	free(buffer);
@@ -37,7 +36,10 @@ void tcpServer(int buffer_size, int num_thr)
 	int server_sock, client_sock;
 	struct sockaddr_in server_addr;
 	struct sockaddr_in client_addr;
-
+	if (buffer_size == 65536)
+	{
+		buffer_size = 65507;
+	}
 	memset(&server_addr, 0, sizeof(server_addr));
 	server_addr.sin_family = AF_INET;
 	server_addr.sin_addr.s_addr = INADDR_ANY;
@@ -59,6 +61,7 @@ void tcpServer(int buffer_size, int num_thr)
 		pthread_create(&threads[i], NULL, tcpOprtData, thr_arg);
 		i++;
 	}
+	
 }
 
 void *udpOprtData(void *arg)
@@ -74,7 +77,6 @@ void *udpOprtData(void *arg)
 	int i = 0;
 	for (i = 0 ; i < LOOPS; ++i) {
 		recvfrom(thr_arg -> sock, buffer, thr_arg -> buffer_size, 0, (struct sockaddr *)&client_addr, &sockaddr_in_size);
-		sendto(thr_arg -> sock, buffer, thr_arg -> buffer_size, 0, (struct sockaddr *)&client_addr, sizeof(struct sockaddr));
 	}
     return NULL;
 }
