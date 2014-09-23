@@ -48,6 +48,7 @@ int do_Flops(int thread_n)
 {
     int i = 0;
     struct timeval startTime, endTime;
+    // total operations
     unsigned long operations = LOOPS * thread_n;
     pthread_t threads[thread_n];
     
@@ -61,7 +62,7 @@ int do_Flops(int thread_n)
     gettimeofday(&endTime, NULL);
     
     double exec_time = 1000.0 * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec) / 1000.0; // total time in ms
-    double flops = ((double)operations / (exec_time / 1000)) / 1e9;
+    double flops = ((double)operations / (exec_time / 1000)) / 1e9; //GFLOPS
     printf("With %d threads, the execution time is %10f ms and the GFlOPS is %10f\n", thread_n, exec_time, flops);
     
     return 0;
@@ -71,6 +72,7 @@ int do_Iops(int thread_n)
 {
     int i = 0;
     struct timeval startTime, endTime;
+    // total operations
     unsigned long operations = 2ul * LOOPS * thread_n;
     pthread_t threads[thread_n];
     
@@ -83,8 +85,8 @@ int do_Iops(int thread_n)
     }
     gettimeofday(&endTime, NULL);
     
-    double exec_time = 1000.0 * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec) / 1000.0;
-    double iops = ((double)operations / (exec_time / 1000)) / 1e9;
+    double exec_time = 1000.0 * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec) / 1000.0; // total time in ms
+    double iops = ((double)operations / (exec_time / 1000)) / 1e9; //IOPS
     printf("With %d threads, the execution time is %10f ms and the GIOPS is %10f\n", thread_n, exec_time, iops);
     
     return 0;
@@ -96,6 +98,7 @@ void * flops(void * arg)
     float sum = 0;
     
     for (i = 0; i < LOOPS; i++) {
+        // float addition
         sum += (float)i;
     }
     
@@ -108,6 +111,7 @@ void * iops(void * arg)
     int sum = 0;
     
     for (i = 0; i < LOOPS; i++) {
+        // integer addition
         sum += i;
     }
     

@@ -14,8 +14,8 @@
 //Define the struct of thread. 
 struct thread_arg
 {
-	int buf_size;
-	struct sockaddr_in server_addr;
+	int bufferSize;
+	struct sockaddr_in addrServer;
 };
 
 //Define the function of TCP client.
@@ -23,16 +23,16 @@ void *tcpClient(void *arg)
 {
 	//Initializing related arguments and connect to the server. 
 	struct thread_arg *thr_arg = (struct thread_arg *)arg;
-	char *buffer = (char *)malloc(sizeof(char) * (thr_arg -> buf_size));
-	memset(buffer, 1, sizeof(char) * (thr_arg -> buf_size));
+	char *buffer = (char *)malloc(sizeof(char) * (thr_arg -> bufferSize));
+	memset(buffer, 1, sizeof(char) * (thr_arg -> bufferSize));
 	int client_sock = socket(AF_INET, SOCK_STREAM, 0);
-	connect(client_sock, (struct sockaddr *)&(thr_arg -> server_addr), sizeof(struct sockaddr));
+	connect(client_sock, (struct sockaddr *)&(thr_arg -> addrServer), sizeof(struct sockaddr));
 
 	//Send and receive data. 
 	int i = 0;
 	for (i = 0; i < LOOPS; ++i)
 	{
-		send(client_sock, buffer, thr_arg -> buf_size, 0);
+		send(client_sock, buffer, thr_arg -> bufferSize, 0);
 	}
 }
 
@@ -41,8 +41,8 @@ void *udpClient(void *arg)
 {
 	//Initializing related arguments and connect to the server. 
 	struct thread_arg *thr_arg = (struct thread_arg *)arg;
-	char *buffer = (char *)malloc(sizeof(char) * (thr_arg -> buf_size));
-	memset(buffer, 1, sizeof(char) * (thr_arg -> buf_size));
+	char *buffer = (char *)malloc(sizeof(char) * (thr_arg -> bufferSize));
+	memset(buffer, 1, sizeof(char) * (thr_arg -> bufferSize));
 	int sockaddr_in_size = sizeof(struct sockaddr_in);
 	int client_sock = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -50,7 +50,7 @@ void *udpClient(void *arg)
 	int i = 0;
 	for (i = 0; i < LOOPS; ++i)
 	{
-		sendto(client_sock, buffer, thr_arg -> buf_size, 0, (struct sockaddr *)&(thr_arg -> server_addr), sizeof(struct sockaddr));
+		sendto(client_sock, buffer, thr_arg -> bufferSize, 0, (struct sockaddr *)&(thr_arg -> addrServer), sizeof(struct sockaddr));
 	}
 }
 
@@ -70,15 +70,15 @@ int main(int argc, char *argv[])
 		buffer_size = 65507;
 	}
 	//Define and initialize the socket related parameters.
-	struct sockaddr_in server_addr;
-	server_addr.sin_family = AF_INET;
-	server_addr.sin_addr.s_addr = inet_addr(server_ip);
-	server_addr.sin_port = htons(4567);
+	struct sockaddr_in addrServer;
+	addrServer.sin_family = AF_INET;
+	addrServer.sin_addr.s_addr = inet_addr(server_ip);
+	addrServer.sin_port = htons(4567);
 
 	//Initializing threads and assign related parameters.
 	struct thread_arg *thr_arg = (struct thread_arg *)malloc(sizeof(struct thread_arg));
-	thr_arg -> server_addr = server_addr;
-	thr_arg -> buf_size = buffer_size;
+	thr_arg -> addrServer = addrServer;
+	thr_arg -> bufferSize = buffer_size;
 	pthread_t threads[num_thr];
 
 	//Define the start time and end time. 

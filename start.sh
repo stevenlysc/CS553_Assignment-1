@@ -17,11 +17,13 @@ do
 	done
 done
 
+########################
 mkdir memory_Result
 echo "Memory_Benchmark: "
 ./memory_benchmark >>memory.txt
 mv memory.txt memory_Result
 
+########################
 mkdir disk_Result
 for opt in Write Read
 do
@@ -59,6 +61,15 @@ do
             mv network"_"$connect"_"$packet"_"$thread.txt network_Result
         done
     done
+done
+
+########################
+mkdir GPU_Result
+for i in 1 2 3
+do
+    echo GPU_Benchmark$i:
+    ./gpu_benchmark >>gpu_result$i.txt
+    mv gpu_result$i.txt GPU_Result
 done
 
 rm cpu_benchmark disk_benchmark memory_benchmark client_benchmark server_benchmark gpu_benchmark test.bin

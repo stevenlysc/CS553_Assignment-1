@@ -101,7 +101,7 @@ int do_Read_Ran(int block_size, int thread_n)
     }
     gettimeofday(&endTime, NULL);
     
-    int capacity;
+    int capacity;  // modify file size
     if (block_size == 1) {
         capacity = MAX / 50;
     }
@@ -114,7 +114,7 @@ int do_Read_Ran(int block_size, int thread_n)
     
     double execTime = 1000.0 * (endTime.tv_sec - startTime.tv_sec) + (endTime.tv_usec - startTime.tv_usec) / 1000.0; // total time in ms
     double throughput = ((double) thread_n * capacity / (1024.0 * 1024.0)) / (execTime / 1000.0); // MBps
-    double latency = execTime / capacity;
+    double latency = execTime / capacity; // s/B
     
     printf("With %d threads, for random reading from disk, the throughput is %10lf MBps and the latency is %10.9lf ms\n", thread_n, throughput, latency);
     
@@ -136,7 +136,7 @@ int do_Read_Seq(int block_size, int thread_n)
     }
     gettimeofday(&endTime, NULL);
     
-    int capacity;
+    int capacity; // modify file size
     if (block_size == 1) {
         capacity = MAX / 50;
     }
@@ -171,7 +171,7 @@ int do_Write_Ran(int block_size, int thread_n)
     }
     gettimeofday(&endTime, NULL);
     
-    int capacity;
+    int capacity; // modiify file size
     if (block_size == 1) {
         capacity = MAX / 50;
     }
@@ -206,7 +206,7 @@ int do_Write_Seq(int block_size, int thread_n)
     }
     gettimeofday(&endTime, NULL);
     
-    int capacity;
+    int capacity; // modify file size
     if (block_size == 1) {
         capacity = MAX / 50;
     }
@@ -245,14 +245,18 @@ void * random_Read(void * arg)
     srand((int)time(0));
     
     int fin;
+    // read-only
     if ((fin = open("test.bin", O_RDONLY, 0666)) < 0) {
         printf("File open failed.\n");
         exit(-1);
     }
     int i = 0;
     for (i = 0; i < capacity / block_size; i++) {
+        // random position in the file
         fpos = (rand() % (capacity / block_size)) * block_size;
+        // locate to the random position
         lseek(fin, fpos, SEEK_SET);
+        // read file
         read(fin, buffer, block_size);
     }
     
@@ -279,6 +283,7 @@ void * sequential_Read(void * arg)
     }
     
     int fin;
+    // read-only
     if ((fin = open("test.bin", O_RDONLY, 0666)) < 0) {
         printf("File open failed.\n");
         exit(-1);
@@ -286,6 +291,7 @@ void * sequential_Read(void * arg)
     
     int i = 0;
     for (i = 0; i < capacity / block_size; i++) {
+        // read the file sequentially
         read(fin, buffer, block_size);
     }
     
@@ -314,6 +320,7 @@ void * random_Write(void * arg)
     }
     
     int fin;
+    // create file / write file
     if ((fin = open("test.bin", O_CREAT|O_TRUNC|O_WRONLY, 0666)) < 0) {
         printf("File open failed.\n");
         exit(-1);
@@ -321,9 +328,13 @@ void * random_Write(void * arg)
     
     int i = 0;
     for (i = 0; i < capacity / block_size; i++) {
+        // random position in the file
         fpos = (rand() % (capacity / block_size)) * block_size;
+        // set the content to be written
         memset(buffer, '0', block_size);
+        // find the random position in file
         lseek(fin, fpos, SEEK_SET);
+        // write from buffer into file
         write(fin, buffer, block_size);
     }
     
@@ -350,6 +361,7 @@ void * sequential_Write(void * arg)
     }
     
     int fin;
+    // create file / write file
     if ((fin = open("test.bin", O_CREAT|O_TRUNC|O_WRONLY, 0666)) < 0) {
         printf("File open failed.\n");
         exit(-1);
@@ -357,7 +369,9 @@ void * sequential_Write(void * arg)
     
     int i = 0;
     for (i = 0; i < capacity / block_size; i++) {
+        // set buffer content to be written
         memset(buffer, '0', block_size);
+        // write to disk sequentially
         write(fin, buffer, block_size);
     }
     
