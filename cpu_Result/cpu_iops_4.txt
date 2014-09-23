@@ -1,0 +1,1 @@
+With 4 threads, the execution time is 394.526000 ms and the GIOPS is   2.027750

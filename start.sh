@@ -1,4 +1,7 @@
-sh MakeAll
+#!/bin/sh
+
+sh MakeFile
+
 ######################
 ######################
 mkdir cpu_Result
@@ -38,5 +41,24 @@ do
 	done
 done
 
+######################
+mkdir network_Result
+for connect in TCP UDP
+do
+    for packet in 1 1024 65536
+    do
+        for thread in 1 2
+        do
+            echo "Network_Benchmark: connect type: "$connect", packet size:"$packet	\
+            ", thread number: "$thread
 
-rm cpu_benchmark memory_benchmark disk_benchmark test.bin
+            ./server_benchmark $connect $packet $thread &
+            ./client_benchmark $connect "127.0.0.1" $packet $thread >>	\
+            network"_"$connect"_"$packet"_"$thread.txt
+
+            mv network"_"$connect"_"$packet"_"$thread.txt network_Result
+        done
+    done
+done
+
+rm cpu_benchmark disk_benchmark memory_benchmark client_benchmark server_benchmark gpu_benchmark test.bin

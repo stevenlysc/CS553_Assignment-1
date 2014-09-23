@@ -1,0 +1,1 @@
+With 1 threads, the execution time is 273.433000 ms and the GFlOPS is   0.365720

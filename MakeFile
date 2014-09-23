@@ -1,3 +1,4 @@
+
 gcc cpu_benchmark.c -pthread -o cpu_benchmark
 
 #nvcc gpu_benchmark.cu -o gpu_benchmark

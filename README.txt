@@ -37,6 +37,12 @@ How to run the benchmarks:
 		thread number:  1 / 2 / 4 / 8
 
     GPU Benchmark:
+	First, locate to the folder in Terminal;
+	Second, compile the source code using command:
+		nvcc gpu_benchmark.cu -o gpu_benchmark
+	Then, run the UNIX executable file gpu_benchmark using command:
+		./gpu_benchmark
+	Notification: this benchmark can only be executed on the computer which has NVIDIA GPU and CUDA supportive.
 
     Memory Benchmark:
 	First, locate to the folder in Terminal;
