@@ -20,9 +20,9 @@ Files included in this assignment:
 	MakeAll			runscripts.sh		 Result
 
 
-——————————————————————————
-How to run the benchmarks:
-——————————————————————————
+———————————————————————————————————
+How to run the benchmarks (manual):
+———————————————————————————————————
 
     First of all, all codes are supposed to be compiled and run under Mac OS or Linux.
 

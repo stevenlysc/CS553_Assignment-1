@@ -1,10 +1,9 @@
 #!/bin/sh
-
 sh MakeFile
 
 ######################
 ######################
-mkdir cpu_Result
+mkdir Result/cpu_Result
 for opt in flops iops
 do
 	for thread in 1 2 4 8
@@ -13,18 +12,22 @@ do
 		
 		./cpu_benchmark $opt $thread >>cpu"_"$opt"_"$thread.txt
 
-		mv cpu"_"$opt"_"$thread.txt cpu_Result
+		mv cpu"_"$opt"_"$thread.txt Result/cpu_Result
 	done
 done
+echo "\n"
 
 ########################
-mkdir memory_Result
-echo "Memory_Benchmark: "
-./memory_benchmark >>memory.txt
-mv memory.txt memory_Result
+mkdir Result/memory_Result
+
+    echo "Memory_Benchmark$i: "
+    ./memory_benchmark >>memory$i.txt
+    mv memory$i.txt Result/memory_Result
+
+echo "\n"
 
 ########################
-mkdir disk_Result
+mkdir Result/disk_Result
 for opt in Write Read
 do
 	for access in seq ran
@@ -37,14 +40,15 @@ do
 		
 				./disk_benchmark $opt $access $block $thread >>disk"_"$opt"_"$access"_"$block"_"$thread.txt
 				
-				mv disk"_"$opt"_"$access"_"$block"_"$thread.txt disk_Result
+				mv disk"_"$opt"_"$access"_"$block"_"$thread.txt Result/disk_Result
 			done
 		done
 	done
 done
+echo "\n"
 
 ######################
-mkdir network_Result
+mkdir Result/network_Result
 for connect in TCP UDP
 do
     for packet in 1 1024 65536
@@ -58,18 +62,19 @@ do
             ./client_benchmark $connect "127.0.0.1" $packet $thread >>	\
             network"_"$connect"_"$packet"_"$thread.txt
 
-            mv network"_"$connect"_"$packet"_"$thread.txt network_Result
+            mv network"_"$connect"_"$packet"_"$thread.txt Result/network_Result
         done
     done
 done
+echo "\n"
 
 ########################
-mkdir GPU_Result
-for i in 1 2 3
-do
+mkdir Result/GPU_Result
+
     echo GPU_Benchmark$i:
     ./gpu_benchmark >>gpu_result$i.txt
-    mv gpu_result$i.txt GPU_Result
-done
+    mv gpu_result$i.txt Result/GPU_Result
+
+echo "\n"
 
 rm cpu_benchmark disk_benchmark memory_benchmark client_benchmark server_benchmark gpu_benchmark test.bin

@@ -1,1 +1,0 @@
-With 1 threads, for random reading from disk, the throughput is 1573.281241 MBps and the latency is 0.000000606 ms

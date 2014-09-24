@@ -1,1 +1,0 @@
-With 2 threads, the execution time is 285.180000 ms and the GFlOPS is   0.701311
