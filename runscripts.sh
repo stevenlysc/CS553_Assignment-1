@@ -1,6 +1,8 @@
 #!/bin/sh
 sh MakeFile
 
+rm -r Result
+mkdir Result
 ######################
 ######################
 mkdir Result/cpu_Result

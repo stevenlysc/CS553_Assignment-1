@@ -30,7 +30,6 @@ void *tcpClient(void *arg)
 	err_connect = connect(client_sock, (struct sockaddr *)&(thr_arg -> server_addr), sizeof(struct sockaddr));
 	if(err_connect == -1)
 	{
-		printf("Error: TCP connect\n");
 		exit(-1);
 	}
 	//Send and receive data. 
@@ -54,7 +53,6 @@ void *udpClient(void *arg)
 	int client_sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if(client_sock == -1)
 	{
-		printf("Error: UDP client socket\n");
 		exit(-1);
 	}
 

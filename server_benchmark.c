@@ -53,7 +53,6 @@ void tcpServer(int buffer_size, int num_thr)
 	err_bind = bind(server_sock, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
 	if(err_bind == -1)
 	{
-		printf("Error: TCP server bind\n");
 		exit(-1);
 	}
 
@@ -69,7 +68,6 @@ void tcpServer(int buffer_size, int num_thr)
 		client_sock = accept(server_sock, (struct sockaddr *)&client_addr, &sockaddr_in_size);
 		if(client_sock == -1)
 		{
-			printf("Error: TCP server accept\n");
 			exit(-1);
 		}
 		struct thread_arg * thr_arg = (struct thread_arg *)malloc(sizeof(struct thread_arg));
@@ -122,7 +120,6 @@ void udpServer(int buffer_size, int num_thr)
 	server_sock = socket(AF_INET, SOCK_DGRAM, 0);
 	if(server_sock == -1)
 	{
-		printf("Error: UDP server socket\n");
 		exit(-1);
 	}
 
@@ -130,7 +127,6 @@ void udpServer(int buffer_size, int num_thr)
 	err_bind = bind(server_sock, (struct sockaddr *)&server_addr, sizeof(struct sockaddr));
 	if(err_bind == -1)
 	{
-		printf("Error: UDP server bind\n");
 		exit(-1);
 	}
 
