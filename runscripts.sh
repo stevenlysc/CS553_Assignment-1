@@ -17,7 +17,7 @@ do
 		mv cpu"_"$opt"_"$thread.txt Result/cpu_Result
 	done
 done
-echo "\n"
+echo " "
 
 ########################
 mkdir Result/memory_Result
@@ -26,7 +26,7 @@ mkdir Result/memory_Result
     ./memory_benchmark >>memory$i.txt
     mv memory$i.txt Result/memory_Result
 
-echo "\n"
+echo " "
 
 ########################
 mkdir Result/disk_Result
@@ -47,7 +47,7 @@ do
 		done
 	done
 done
-echo "\n"
+echo " "
 
 ######################
 mkdir Result/network_Result
@@ -68,7 +68,7 @@ do
         done
     done
 done
-echo "\n"
+echo " "
 
 ########################
 mkdir Result/GPU_Result
@@ -77,6 +77,6 @@ mkdir Result/GPU_Result
     ./gpu_benchmark >>gpu_result$i.txt
     mv gpu_result$i.txt Result/GPU_Result
 
-echo "\n"
+echo " "
 
 rm cpu_benchmark disk_benchmark memory_benchmark client_benchmark server_benchmark gpu_benchmark test.bin
